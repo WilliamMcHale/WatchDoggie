@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WatchDoggie – booking, vaccine checks and owner updates for small dog daycares</title>
+<meta name="description" content="WatchDoggie helps small, owner-run dog daycares in Ireland stop overbooking, catch expired vaccinations at the door, and answer 'how's my dog?' without the message flood.">
+<style>
+:root{--bg:#fbfaf6;--ink:#1d2327;--muted:#59636b;--brand:#1f6f5c;--brand-dark:#16523f;--soft:#e2f0eb;--warm:#fff1cc;--line:#e4e0d6;--red:#b42318;--amber:#a86b00;}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);font-size:18px;line-height:1.55}
+a{color:var(--brand)}
+.wrap{max-width:980px;margin:0 auto;padding:0 18px}
+/* nav */
+.nav{position:sticky;top:0;z-index:10;background:rgba(251,250,246,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;min-height:62px;gap:10px}
+.logo{font-weight:900;font-size:21px;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:8px}
+.logo b{white-space:nowrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:12px 22px;border-radius:12px;font-weight:800;font-size:17px;text-decoration:none;border:2px solid var(--brand);background:var(--brand);color:#fff;cursor:pointer;font-family:inherit}
+.btn:hover{background:var(--brand-dark);border-color:var(--brand-dark)}
+.btn.ghost{background:#fff;color:var(--brand)}
+.btn.ghost:hover{background:var(--soft)}
+.btn.sm{min-height:44px;padding:8px 14px;font-size:15px}
+/* hero */
+.hero{padding:44px 0 36px}
+.eyebrow{display:inline-block;background:var(--soft);color:var(--brand-dark);font-weight:800;font-size:14px;border-radius:999px;padding:5px 12px;margin-bottom:14px}
+h1{font-size:clamp(32px,7vw,52px);line-height:1.08;margin:0 0 16px;letter-spacing:-.5px}
+.lead{font-size:20px;color:var(--muted);margin:0 0 24px;max-width:640px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px}
+.cta-row .btn{flex:1 1 220px}
+.hero-grid{display:grid;gap:28px;align-items:center}
+.phone{background:#1d2327;border-radius:34px;padding:12px;max-width:310px;margin:0 auto;box-shadow:0 20px 50px rgba(0,0,0,.18)}
+.screen{background:#f6f4ef;border-radius:24px;overflow:hidden;font-size:14px}
+.screen .top{background:var(--brand);color:#fff;padding:12px 14px;font-weight:800}
+.screen .row{display:flex;justify-content:space-between;align-items:center;background:#fff;margin:8px 10px;border-radius:12px;padding:10px 12px;border:1px solid var(--line)}
+.pill{border-radius:999px;padding:2px 9px;font-weight:800;font-size:12px}
+.p-red{background:#fde4e1;color:var(--red)} .p-amb{background:#ffefc2;color:var(--amber)} .p-grn{background:#e3f4e8;color:#1e7b3a}
+.tapbar{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:8px 10px 12px}
+.tapbar span{background:#fff;border:2px solid var(--line);border-radius:10px;text-align:center;padding:9px 0;font-weight:800}
+.caption{text-align:center;color:var(--muted);font-size:14px;margin-top:10px}
+/* sections */
+section{padding:44px 0;border-top:1px solid var(--line)}
+h2{font-size:clamp(26px,5vw,36px);line-height:1.15;margin:0 0 12px}
+.sub{color:var(--muted);margin:0 0 24px;max-width:680px}
+.quotes{display:grid;gap:14px}
+.quote{background:#fff;border:1px solid var(--line);border-left:6px solid var(--amber);border-radius:14px;padding:16px 18px;font-size:19px;font-weight:600}
+.label{font-size:13px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.6px}
+.steps{display:grid;gap:16px;counter-reset:s}
+.step{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px}
+.step .n{display:inline-flex;width:40px;height:40px;border-radius:50%;background:var(--brand);color:#fff;font-weight:900;align-items:center;justify-content:center;font-size:20px;margin-bottom:10px}
+.step h3{margin:0 0 6px;font-size:21px}
+.step p{margin:0;color:var(--muted)}
+.demo-box{background:var(--soft);border-radius:18px;padding:24px;text-align:center}
+.demo-box p{margin:0 0 16px}
+.price{background:#fff;border:2px solid var(--brand);border-radius:18px;padding:24px;max-width:520px}
+.price .amt{font-size:44px;font-weight:900;line-height:1}
+.price .amt small{font-size:18px;color:var(--muted);font-weight:700}
+.price ul{padding-left:20px;margin:14px 0 0}
+.price li{margin:6px 0}
+.honest{display:grid;gap:14px}
+.honest div{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.honest h3{margin:0 0 6px;font-size:18px}
+.honest ul{margin:0;padding-left:20px;color:var(--muted)}
+.tag{display:inline-block;font-size:12px;font-weight:800;border-radius:6px;padding:2px 7px;margin-left:6px;vertical-align:middle}
+.t-now{background:#e3f4e8;color:#1e7b3a}.t-plan{background:#eef0f3;color:#4a5560}
+/* form */
+.waitlist{background:#1d2327;color:#fff;border-radius:20px;padding:28px 22px}
+.waitlist h2{color:#fff}
+.waitlist .sub{color:#c9d1d6}
+form{display:grid;gap:12px;max-width:520px}
+label{font-weight:700;font-size:15px}
+input,select{font:inherit;font-size:17px;min-height:52px;border-radius:12px;border:2px solid #3a444b;background:#fff;color:var(--ink);padding:10px 12px;width:100%}
+.fine{font-size:14px;color:#aab4ba;margin:4px 0 0}
+.thanks{display:none;background:var(--soft);color:var(--brand-dark);border-radius:14px;padding:18px;font-weight:700;max-width:520px}
+footer{padding:30px 0 40px;color:var(--muted);font-size:15px;border-top:1px solid var(--line)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center}
+@media(min-width:820px){
+  .hero-grid{grid-template-columns:1.25fr 1fr}
+  .quotes{grid-template-columns:1fr 1fr 1fr}
+  .steps{grid-template-columns:1fr 1fr 1fr}
+  .honest{grid-template-columns:1fr 1fr}
+  .cta-row .btn{flex:0 0 auto}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav"><div class="wrap">
+  <a class="logo" href="#top"><span aria-hidden="true">🐾</span><b>Watch<em style="font-style:normal;color:var(--brand)">Doggie</em></b></a>
+  <a class="btn sm" href="#waitlist">Join waiting list</a>
+</div></nav>
+
+<header class="hero" id="top"><div class="wrap hero-grid">
+  <div>
+    <span class="eyebrow">For small, owner-run dog daycares in Dublin &amp; the commuter belt</span>
+    <h1>No more overbooked mornings or expired vaccines at the door.</h1>
+    <p class="lead">WatchDoggie is one simple app for your daycare: it only books a dog if there's a place and its vaccinations are in date, and staff log each dog's day with one tap so owners can check in for themselves.</p>
+    <div class="cta-row">
+      <a class="btn" href="https://williammchale.github.io/WaggiyTails-Demo/" target="_blank" rel="noopener">Try the demo →</a>
+      <a class="btn ghost" href="#waitlist">Join the waiting list</a>
+    </div>
+  </div>
+  <div>
+    <div class="phone" aria-hidden="true"><div class="screen">
+      <div class="top">Today · 40 places</div>
+      <div class="row"><b>Bella</b><span class="pill p-red">Expired – can't check in</span></div>
+      <div class="row"><b>Luna</b><span class="pill p-amb">Expires in 2 days</span></div>
+      <div class="row"><b>Charlie</b><span class="pill p-grn">✓ In date</span></div>
+      <div class="tapbar"><span>🍽️ Ate</span><span>🦮 Walked</span><span>🎾 Played</span><span>💤 Napped</span></div>
+    </div></div>
+    <p class="caption">Illustration of the Today screen, using sample dogs</p>
+  </div>
+</div></header>
+
+<section id="problem"><div class="wrap">
+  <h2>Sound familiar?</h2>
+  <p class="sub">Bookings arrive by message, DM and text. The diary lives on paper. And your team is answering "how's my dog?" with a lead in each hand.</p>
+  <div class="quotes">
+    <div class="quote">"I'm answering messages about who's coming Friday while trying to watch 30 dogs."</div>
+    <div class="quote">"Mondays we're turning dogs away at the door, and Wednesday is half empty."</div>
+    <div class="quote">"I only find out a vaccine's expired when the dog's already in the door."</div>
+  </div>
+  <p class="label" style="margin-top:12px">Illustrative quotes: invented to describe the problem, not from real customers.</p>
+</div></section>
+
+<section id="how"><div class="wrap">
+  <h2>How it works, in three steps</h2>
+  <p class="sub">Built around how a busy daycare floor actually runs.</p>
+  <div class="steps">
+    <div class="step"><span class="n">1</span><h3>Book with real places left</h3><p>See every day's places left at a glance. A full day can't be overbooked: WatchDoggie offers the nearest day with room instead.</p></div>
+    <div class="step"><span class="n">2</span><h3>Vaccines checked at the door</h3><p>Vaccines that expire within 14 days turn amber. Expired ones turn red and the dog can't be booked or checked in until the record is updated.</p></div>
+    <div class="step"><span class="n">3</span><h3>One tap per update</h3><p>Staff tap Ate, Walked, Played or Napped. Each owner opens their own Pupdate with a personal code and sees only their own dog's day.</p></div>
+  </div>
+</div></section>
+
+<section id="demo"><div class="wrap">
+  <div class="demo-box">
+    <h2>See it working</h2>
+    <p>The demo is a working alpha built for one Dublin daycare, running on made-up sample dogs. Try booking a full Monday, or checking in a dog with an expired vaccine.</p>
+    <a class="btn" href="https://williammchale.github.io/WaggiyTails-Demo/" target="_blank" rel="noopener">Try the demo →</a>
+  </div>
+</div></section>
+
+<section id="pricing"><div class="wrap">
+  <h2>Simple pricing</h2>
+  <p class="sub">One daycare, one price. No long contract.</p>
+  <div class="price">
+    <div class="label">Founding price</div>
+    <div class="amt">€39 <small>/ month</small></div>
+    <p style="margin:8px 0 0">+ €149 one-off setup. We load your dogs, owners and vaccination dates for you.</p>
+    <ul>
+      <li>Bookings with a daily place limit (40 in the demo)</li>
+      <li>Vaccine alerts and check-in block</li>
+      <li>One-tap daily notes and owner Pupdates</li>
+      <li>Dog profiles with photo, owner code and staff notes</li>
+    </ul>
+  </div>
+</div></section>
+
+<section id="honest"><div class="wrap">
+  <h2>What's ready, and what's planned</h2>
+  <p class="sub">WatchDoggie is at an early (alpha) stage. Here's exactly where it stands.</p>
+  <div class="honest">
+    <div>
+      <h3>Works in the demo today <span class="tag t-now">NOW</span></h3>
+      <ul>
+        <li>Week view of places left, with the nearest-free-day suggestion</li>
+        <li>Booking blocked when vaccinations are out of date</li>
+        <li>Amber and red vaccine alerts; red dogs can't be checked in</li>
+        <li>One-tap notes and a private Pupdate per owner code</li>
+        <li>Dog profiles with photo, search and staff notes</li>
+        <li>Changes saved on the device you're using</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Planned for launch <span class="tag t-plan">PLANNED</span></h3>
+      <ul>
+        <li>Sync across all staff phones and tablets</li>
+        <li>Owner logins on their own phones, with a private link</li>
+        <li>Owners booking and updating vaccine records themselves</li>
+        <li>Importing your existing dogs and bookings</li>
+        <li>Your own daily place limit and opening days</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<section id="waitlist"><div class="wrap">
+  <div class="waitlist">
+    <h2>Join the waiting list</h2>
+    <p class="sub">We're opening WatchDoggie to a small group of Irish daycares first. Leave your details and we'll be in touch.</p>
+    <form id="wl" novalidate>
+      <div><label for="dc">Daycare name</label><input id="dc" autocomplete="off" placeholder="e.g. Happy Paws Daycare"></div>
+      <div><label for="em">Email</label><input id="em" type="email" autocomplete="off" placeholder="you@yourdaycare.ie"></div>
+      <div><label for="sz">Dogs per day</label><select id="sz"><option>Under 20</option><option selected>20–50</option><option>Over 50</option></select></div>
+      <button class="btn" type="button" id="wlBtn">Join the waiting list</button>
+      <p class="fine">Demo form: nothing you type here is sent or stored anywhere.</p>
+    </form>
+    <div class="thanks" id="thanks">🐾 Thanks! You're on the WatchDoggie waiting list. (Demo: no details were sent or saved.)</div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <span>© 2026 WatchDoggie · a student concept, not a real company</span>
+  <a href="notes.html">Behind the build</a>
+</div></footer>
+
+<script>
+(function(){
+  var btn=document.getElementById("wlBtn"), form=document.getElementById("wl"), thanks=document.getElementById("thanks");
+  function done(){ form.style.display="none"; thanks.style.display="block"; thanks.scrollIntoView({behavior:"smooth",block:"center"}); }
+  btn.addEventListener("click", done);
+  form.addEventListener("submit", function(e){ e.preventDefault(); done(); });
+})();
+</script>
+</body>
+</html>
