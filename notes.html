@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WatchDoggie – Behind the build</title>
+<style>
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:#fbfaf6;color:#1d2327;font-size:17px;line-height:1.6}
+.wrap{max-width:760px;margin:0 auto;padding:24px 18px 48px}
+h1{font-size:30px;margin:0 0 4px}
+h2{font-size:22px;margin:32px 0 8px;padding-top:16px;border-top:1px solid #e4e0d6}
+.case{display:inline-block;background:#1d2327;color:#fff;font-weight:800;border-radius:8px;padding:4px 12px;margin:8px 0 4px}
+.hunch{background:#fff1cc;border-left:6px solid #a86b00;border-radius:10px;padding:14px 16px;margin:10px 0}
+.box{background:#fff;border:1px solid #e4e0d6;border-radius:12px;padding:14px 16px;margin:10px 0}
+.lbl{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:#59636b}
+table{border-collapse:collapse;width:100%;font-size:16px}
+td,th{border-bottom:1px solid #e4e0d6;padding:8px 6px;text-align:left;vertical-align:top}
+th{width:34%;color:#59636b}
+a{color:#1f6f5c}
+.muted{color:#59636b;font-size:15px}
+</style>
+</head>
+<body><div class="wrap">
+
+<p><a href="index.html">← Back to WatchDoggie</a></p>
+<h1>Behind the build</h1>
+<div class="case">Case H: Waggy Tails Dog Daycare, Lucan, Co. Dublin</div>
+
+<h2>Hunch (before AI)</h2>
+<div class="hunch">Well my hunch is people in the pet daycare buisness would be buying it and maybe even on a more human considerate one a child day care system, it caters for daycares that are short of staff that take care of a lot of animals per employee.</div>
+<p class="muted">Written before opening any AI tool and not edited since.</p>
+
+<h2>Niche</h2>
+<table>
+<tr><th>Who they are</th><td>Small, owner-run, single-site dog daycares in Dublin and the commuter belt (Kildare, Meath, Wicklow): roughly 20–50 dogs a day and 3–8 staff, with bookings arriving by messaging apps, social media DMs and text.</td></tr>
+<tr><th>Buyer (who pays)</th><td>The owner-manager, who carries the cost of overbooked days, half-empty days and vaccination risk.</td></tr>
+<tr><th>User (every day)</th><td>Floor staff, hands full of leads, on a shared phone or tablet. Dog owners use only their own Pupdate.</td></tr>
+<tr><th>Their pain, in their words <em>(invented)</em></th><td>"I'm answering messages about who's coming Friday while trying to watch 30 dogs."<br>"I only find out a vaccine's expired when the dog's already in the door."</td></tr>
+</table>
+<p class="muted">Why this niche: it follows from my hunch. Short-staffed daycares with many dogs per employee feel overbooking, vaccine checks and owner messages the most. Child daycare, mentioned in my hunch, is outside this case's market (pet care businesses in Ireland), so I left it out.</p>
+
+<h2>Type of technology and how it's done today</h2>
+<div class="box"><b>Technology:</b> a booking and daily-care system (capacity booking + vaccination check at check-in + an owner update portal).<br>
+<b>How the niche does it today:</b> bookings in messaging apps, DMs and a paper diary or spreadsheet; vaccination cards checked by eye on paper; owners updated one message and photo at a time.</div>
+
+<h2>Two real products that already do part of this</h2>
+<table>
+<tr><th><a href="https://www.gingrapp.com/dog-daycare-software" target="_blank" rel="noopener">Gingr: dog daycare software</a></th><td>Owner self-booking with capacity limits; vaccination records submitted before arrival, with expired-vaccine flags at check-in; report cards to owners. <span class="muted">Checked at source on 19 October 2026.</span></td></tr>
+<tr><th><a href="https://www.petexec.net/service/daycares" target="_blank" rel="noopener">PetExec: daycare software</a></th><td>Owner portal and app booking; vaccination dates and alerts that can block bookings; report cards by email or print. <span class="muted">Checked at source on 19 October 2026.</span></td></tr>
+</table>
+<p class="muted">Both are larger all-in-one systems with pricing on request. WatchDoggie aims to be a simpler tool, priced for small single-site Irish daycares.</p>
+
+<h2>Business model <em>(assumption)</em></h2>
+<div class="box">€149 one-off setup (loading dogs, owners and vaccination dates) + €39 per month.<br>
+<b>Reasoning:</b> if it prevents one or two turned-away or empty-place days a month it pays for itself, and it's low enough for a single-site owner to try without a long contract.</div>
+
+<h2>Lean PRD</h2>
+<table>
+<tr><th>Hypothesis</th><td>Owners of small Irish dog daycares will join a waiting list for a simple tool that stops overbooking, blocks dogs with expired vaccinations, and answers "how's my dog?" for them.</td></tr>
+<tr><th>Audience</th><td>Owner-managers of single-site dog daycares in Dublin and the commuter belt.</td></tr>
+<tr><th>Call to action</th><td>Join the waiting list.</td></tr>
+<tr><th>Success measure</th><td>About 20 waiting-list sign-ups from about 200 targeted visits (10%) within a month <em>(target, assumption)</em>.</td></tr>
+<tr><th>Out of scope</th><td>Payments, staff rotas, grooming and overnight boarding, a native app, and connecting to messaging apps. The alpha is browser-only with sample data.</td></tr>
+</table>
+
+<h2>Alpha test</h2>
+<div class="box">
+<p><b>What I tried:</b> I used the demo as a member of Waggy Tails staff would: booking a dog onto a full Monday (it offered the nearest day with room), trying to check in a dog with an expired vaccination (blocked in red), checking a dog in and adding one-tap notes, refreshing the page to confirm changes stayed, and opening Pupdate as that dog's owner.</p>
+<p><b>What broke or confused me:</b> Pupdate seemed not to work. Typing an owner code and pressing Open did nothing in the preview, and when a dog hadn't been checked in it only said "hasn't arrived yet", so it looked broken.</p>
+<p><b>What I changed:</b> The Open button was rebuilt so it works in every browser (and Enter works too). Pupdate now explains that notes appear once staff check the dog in on the Today tab. Earlier I had also replaced the owner list with a personal owner code, so an owner sees only their own dog.</p>
+<p><b>Other changes from reviewing the alpha:</b> I added a Dogs tab (between Bookings and Today) with a profile for every dog: a picture (staff can take a real photo), the owner code, care notes, a search bar, and a staff-notes box for personality and likes. The owner code also shows beside each dog in the booking list. This goes beyond the three agreed views, to help staff recognise dogs and match them to owners quickly.</p>
+</div>
+
+<h2>How AI was used</h2>
+<div class="box">I used Claude (Anthropic) throughout, apart from the hunch above. I directed it to research competitors, draft my niche, pricing and PRD for me to review, and write the code for the alpha and this landing page. The choices of niche, product name (WatchDoggie), extra features and changes after testing were mine. All businesses, people, dogs and quotes are fictional.</div>
+
+<p class="muted" style="margin-top:28px"><a href="index.html">← Back to WatchDoggie</a> · <a href="https://williammchale.github.io/WaggyTails-Demo/" target="_blank" rel="noopener">Open the Waggy Tails alpha</a></p>
+</div></body>
+</html>
